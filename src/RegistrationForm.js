@@ -1,6 +1,7 @@
-import React from 'react';
+import {useNavigate} from 'react-router-dom'
 
 const RegistrationForm = () => {
+    const Navigate = useNavigate();
     return (
         <div>
         <form className='container'>
@@ -36,6 +37,8 @@ const RegistrationForm = () => {
                 </input>
             </div>
         </form>
+        <button onClick={()=>Navigate('home')}>Back</button>
+        <button onClick={()=>Navigate('/team-members')}>Next</button>
         </div>
         )
 }

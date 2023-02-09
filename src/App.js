@@ -1,7 +1,7 @@
 import { useNavigate, Route,Routes} from 'react-router-dom';
 import { RegistrationFinal } from './components/RegistrationFinal';
-import RegistrationForm from './RegistrationForm';
-import { TeamMembers } from './TeamMembers';
+import RegistrationForm from './components/RegistrationForm';
+import { TeamMembers } from './components/TeamMembers';
 
 function App() {
  const Navigate=useNavigate();
@@ -9,11 +9,13 @@ function App() {
     <>
     <div className="App">
       Incedo-Hackathon
-      <button onClick={()=>Navigate('/registration-form')}>Register</button>
+      <button type='submit'  onClick={()=>Navigate('/registration-form')}>
+        Register
+      </button>
     </div>
 
     <Routes>
-      <Route path='/registration-form' element={<RegistrationForm/>}>form</Route>
+      <Route path='/registration-form' element={<RegistrationForm/>}></Route>
       <Route path='/team-members' element={<TeamMembers/>}></Route>
       <Route path='/register-final' element={<RegistrationFinal/>}></Route>
     </Routes>

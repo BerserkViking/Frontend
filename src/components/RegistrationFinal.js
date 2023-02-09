@@ -1,4 +1,4 @@
-import './final-part-class.css'
+
 
 export const RegistrationFinal = () => {
   return (

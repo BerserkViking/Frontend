@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 
 const RegistrationForm = () => {
     const Navigate = useNavigate();
-
-    const [teamName, setTeamName] = useState("")
-
+    
     return (
         <div>
         <form className='container'>
@@ -16,7 +13,7 @@ const RegistrationForm = () => {
             </div>
 
             <div>
-                <input type='text' placeholder='Team Name' name='Team name' onChange={(e) => setTeamName(e.target.value)}>
+                <input type='text' placeholder='Team Name' name='Team name' >
                 </input>
             </div>
             <div>

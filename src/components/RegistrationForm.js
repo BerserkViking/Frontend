@@ -2,6 +2,7 @@ import {useNavigate} from 'react-router-dom'
 
 const RegistrationForm = () => {
     const Navigate = useNavigate();
+
     return (
         <div>
         <form className='container'>

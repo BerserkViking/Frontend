@@ -1,26 +1,30 @@
 import React, { useState } from 'react'
 import { Card, CardHeader, CardBody, CardTitle, CardText, Button, CardFooter, Navbar, NavbarBrand, ListGroup, ListGroupItem, NavbarText } from 'reactstrap'
-
+import IncedoLogo from './incedo-logo.png'
+import {Link} from 'react-router-dom'
 export const PanelistView = () => {
   return (
     <>
       <Navbar
-        className="my-2"
-        color="warning"
+        className="my-2 fs-4"
+        style={{ "background-color": "#281E5D" }}
       >
-        
-        <NavbarText className="font-monospace fs-4">
-          Panelist
-        </NavbarText>
-        <Button
-        color="danger"
-      >
-        Log Out
-      </Button>
+        <NavbarBrand href="/" style={{ "color": "tomato" }} className="font-monospace">
+          <img
+            alt="logo"
+            src={IncedoLogo}
+            style={{
+              "width": "50%"
+            }}
+          />
+        </NavbarBrand>
+        <Link to="/" className="btn" style={{ "background-color": "tomato", "color": "white" }}>
+          Log Out
+        </Link>
       </Navbar>
-     
+
       <Card
-        className="my-2"
+        className="my-2 mx-auto col-6"
 
       >
         <CardHeader>
@@ -46,7 +50,7 @@ export const PanelistView = () => {
           </Button>
         </CardFooter>
       </Card>
-      <Card>
+      <Card className='mx-auto col-6'>
         <CardHeader>
           Assigned Idea 2
         </CardHeader>

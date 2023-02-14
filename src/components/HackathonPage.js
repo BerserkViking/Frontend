@@ -1,44 +1,44 @@
-import {Link} from 'react-router-dom'
+import React from 'react'
+import IncedoLogo from './views/incedo-logo.png'
+import { NavbarText, Navbar, Clock, NavbarBrand, Card, CardHeader, CardBody, CardText, Button, CardFooter, CardTitle } from 'reactstrap'
+import {  useNavigate } from 'react-router-dom'
+
 export const HackathonPage = () => {
+  const Navigate=useNavigate();
+
   return (
-    <div>
-      <nav className="navbar navbar-light bg-light text-center fs-1 text font-monospace text-decoration-underline ">
-       Incedo Hack-a-thon
-      </nav>
-      <div className="card" style={{ "width": "20rem","height":"30rem" }}>
+    <>
+      <Navbar
+        className="my-2 fs-4"
+        style={{ "background-color": "#281E5D" }}
+      >
 
-        <div className="card-body mt-6">
-          <h5 className="card-title text-center">Overview</h5>
-          <p className="card-text"> 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-            data data data data 
-
-          </p>
-        </div>
-      </div>
-
-      <div class="card text-bg-info grid gap-5  row-gap-9 position-absolute top-50  start-50 translate-middle" style={{ "width": "15rem" ,"height":"7rem"}}>
-          <Link to='/registration-form' target='_blank' className="btn btn-primary ">Register</Link>
-          <a href="#" class="btn btn-warning ">Login</a>
-        </div>
-      </div>
-
-
-  );
+        <NavbarBrand href="/" style={{ "color": "tomato" }} className="font-monospace">
+          <img
+            alt="logo"
+            src={IncedoLogo}
+            style={{
+              "width": "50%"
+            }}
+          />
+        </NavbarBrand>
+        {/* for spacing */}
+        <div className='col-7'></div> 
+        <Button onClick={() => Navigate('/login')} className="btn" style={{ "background-color": "tomato", "color": "#281E5D" }}>Login</Button>
+        <Button onClick={() => Navigate('/registration-form')} className="btn" style={{ "background-color": "tomato", "color": "#281E5D" }}>Register</Button>
+      </Navbar>
+      <Card className="col-6 mx-auto">
+        <CardBody>
+          <CardTitle>
+            Overview
+          </CardTitle>
+          <CardText>
+            A hackathon, also known as a codefest, is a social coding event that brings computer programmers and other interested
+            people together to improve upon or build a new software program. The word hackathon is a portmanteau of the words hac
+            ker, which means clever programmer, and marathon, an event marked by endurance.The concept of the hackathon, also call
+          </CardText>
+        </CardBody>
+      </Card>
+    </>
+  )
 }
-

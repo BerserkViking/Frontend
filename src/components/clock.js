@@ -11,9 +11,11 @@ function Clock(){
       clearInterval(timerId);
     };
   }, []);
+
   return (
-    <span className="btn btn-danger">
+    <span className="btn font-monospace fs-6" style={{"background-color":"tomato","color":"white"}}>
       {date.toLocaleTimeString()}
+
     </span>
   );
 }

@@ -1,9 +1,10 @@
-import {React,toggle,modal, useState} from 'react'
+import { React, toggle, modal, useState } from 'react'
 import {
-    Navbar, NavbarText, Button, Card, CardHeader, ListGroup, ListGroupItem, CardFooter,
-    Modal, ModalHeader, ModalBody, ModalFooter,Input
+    Navbar, NavbarBrand,Button, Card, CardHeader, ListGroup, ListGroupItem, CardFooter,
+    Modal, ModalHeader, ModalBody, ModalFooter, Input
 } from 'reactstrap'
-
+import {Link} from 'react-router-dom'
+import IncedoLogo from './incedo-logo.png'
 
 import Clock from '../clock';
 
@@ -23,17 +24,23 @@ export const ParticipantView = () => {
         <>
 
             <Navbar
-                className="my-2 "
-                color="warning"
-            >
-                <Clock />
-                <NavbarText className="fs-1 font-monospace">Incedo Hack-a-thon</NavbarText>
-                <Button
-                    color="danger"
-                >
+                className="my-2 fs-4"
+                style={{ "background-color": "#281E5D" }}
+            >  
+            <Clock/>
+                <NavbarBrand href="/" style={{ "color": "tomato" }} className="font-monospace">
+                    <img
+                        alt="logo"
+                        src={IncedoLogo}
+                        style={{
+                            "width": "50%"
+                        }}
+                    />
+                </NavbarBrand>
+                <Link to="/" className="btn" style={{"background-color":"tomato","color":"white"}}>
                     Log Out
-                </Button>
-            </Navbar>
+                </Link>
+            </Navbar>   
             <div className='container text-center'>
                 <div class='row'>
                     <div class='col border border-secondary'>
@@ -76,11 +83,11 @@ export const ParticipantView = () => {
                             name="problem statement"
                             placeholder="Problem Statement"
                         />
-                         <Input
+                        <Input
                             name="problem solution"
                             placeholder="Problem Solution"
                         />
-                    </ModalBody>    
+                    </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={toggle}>
                             save

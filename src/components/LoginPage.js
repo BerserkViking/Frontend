@@ -1,24 +1,36 @@
+import React from 'react'
 import IncedoLogo from './views/incedo-logo.png'
-import {FormGroup, Navbar,NavbarBrand,Label,Input,Form,Button} from 'reactstrap'
-import {Link} from 'react-router-dom'
+import { FormGroup, Navbar, NavbarBrand, Label, Input, Form, Button } from 'reactstrap'
+import axios from 'axios'
+import { Link, useNavigate} from 'react-router-dom'
 
-let target="";
 const LoginPage = () => {
-    const view_toggler = (event) =>{
-        console.log(event.target.value);
-        if(event.target.value==="Participant")
-        target="/participant-view";
-        else
-        target="/panelist-view"
-    }
-    return (
-       <>
-       <Navbar
+  const [userName, setUserName] = useState("")
+  const [password, setPassword] = useState("")
+  const [target,setTarget] = useState("");
+  const Navigate = useNavigate();
+  const handleSubmit = () => {
+    axios.post('https://localhost:8080/user',{
+       userName,password
+    })
+      .then(function (response) {
+        console.log(response);
+        Navigate(target);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  return (
+    <>
+      <Navbar
         className="my-2 fs-4"
         style={{ "background-color": "#281E5D" }}
         Row
       >
-    
+
         <NavbarBrand href="/" style={{ "color": "tomato" }} className="font-monospace">
           <img
             alt="logo"
@@ -28,30 +40,30 @@ const LoginPage = () => {
             }}
           />
         </NavbarBrand>
-        </Navbar>
-        <Form className='col-2  mx-auto '>
-            <FormGroup>
-                <Label>
-                    Team-Name/Username
-                </Label>
-                <Input placeholder='Username'/>
-            </FormGroup>
-            <FormGroup>
-                <Label>
-                    Password
-                </Label>
-                <Input placeholder='Password'/>
-            </FormGroup>
-            <FormGroup>
-                <Label className='text-start'>Participant</Label>
-                <Input name="radio1"type="radio" value='Participant' onChange={view_toggler}/>
-                <Label style={{"margin-left":"15%"}}>Organizer</Label>
-                <Input name="radio1" type="radio" value='Organizer' onChange={view_toggler}/>
-            </FormGroup>
-            <Link to={target} class="btn btn-success mx-auto">Login</Link>
-        </Form>
-        
-       </>
-    )
+      </Navbar>
+      <Form className='col-2  mx-auto '>
+        <FormGroup>
+          <Label>
+            Team-Name/Username
+          </Label>
+          <Input placeholder='Username' onChange={(e) => setUserName(e.target.value)} />
+        </FormGroup>
+        <FormGroup>
+          <Label>
+            Password
+          </Label>
+          <Input placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
+        </FormGroup>
+        <FormGroup>
+          <Label className='text-start'>Participant</Label>
+          <Input name="radio1" type="radio" value='/participant-view' onChange={(e) => setTarget(e.target.value)} />
+          <Label style={{ "margin-left": "15%" }}>Organizer</Label>
+          <Input name="radio1" type="radio" value='/panelist-view' onChange={(e)=> setTarget(e.target.value)} />
+        </FormGroup>
+        <Button class="btn btn-success mx-auto" onClick={handleSubmit}>Login</Button>
+      </Form>
+
+    </>
+  )
 }
 export default LoginPage;

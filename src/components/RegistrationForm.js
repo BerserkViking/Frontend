@@ -3,7 +3,6 @@ import { Table, Form, FormGroup, Label, Input, Col, Button, FormText, FormFeedba
 import IncedoLogo from './incedo-logo.png'
 const RegistrationForm = () => {
     const Navigate = useNavigate();
-
     return (
         <>
             <Navbar
@@ -168,12 +167,12 @@ const RegistrationForm = () => {
                     </FormGroup>
                     <FormGroup row>
                         <Col className='text-start'>
-                            <Button color='warning' onClick={()=>Navigate('')}>
+                            <Button color='warning' onClick={()=>Navigate('/login')}>
                                 Back
                             </Button>
                         </Col>
                         <Col className='text-end'>
-                            <Button color='success' onClick={()=>Navigate('/participant-view')}>
+                            <Button color='success' onClick={()=>Navigate('/login')}>
                                 Next
                             </Button>
                         </Col>

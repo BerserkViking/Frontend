@@ -1,4 +1,4 @@
-import React from 'react'
+import {React , useState} from 'react'
 import IncedoLogo from './views/incedo-logo.png'
 import { FormGroup, Navbar, NavbarBrand, Label, Input, Form, Button } from 'reactstrap'
 import axios from 'axios'
@@ -9,9 +9,12 @@ const LoginPage = () => {
   const [password, setPassword] = useState("")
   const [target,setTarget] = useState("");
   const Navigate = useNavigate();
+
+
   const handleSubmit = () => {
     axios.post('https://localhost:8080/user',{
-       userName,password
+      email: {userName},
+      pass: {password}
     })
       .then(function (response) {
         console.log(response);
@@ -52,7 +55,7 @@ const LoginPage = () => {
           <Label>
             Password
           </Label>
-          <Input placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
+          <Input placeholder='Password' type='Password'onChange={(e) => setPassword(e.target.value)} />
         </FormGroup>
         <FormGroup>
           <Label className='text-start'>Participant</Label>

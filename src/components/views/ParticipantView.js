@@ -1,9 +1,9 @@
 import { React, toggle, modal, useState } from 'react'
 import {
-    Navbar, NavbarBrand,Button, Card, CardHeader, ListGroup, ListGroupItem, CardFooter,
-    Modal, ModalHeader, ModalBody, ModalFooter, Input
+    Navbar, NavbarBrand, Button, Card, CardHeader, ListGroup, ListGroupItem, CardFooter,
+    Modal, ModalHeader, ModalBody, ModalFooter, Input,Popover,PopoverHeader,PopoverBody
 } from 'reactstrap'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import IncedoLogo from './incedo-logo.png'
 
 import Clock from '../clock';
@@ -17,7 +17,8 @@ let team_name = "Vikram Sarabhai"
 
 export const ParticipantView = () => {
     const [modal, setModal] = useState(false);
-
+    const [trigger, setTrigger] = useState(false);
+    
     const toggle = () => setModal(!modal);
 
     return (
@@ -26,8 +27,8 @@ export const ParticipantView = () => {
             <Navbar
                 className="my-2 fs-4"
                 style={{ "background-color": "#281E5D" }}
-            >  
-            <Clock/>
+            >
+                <Clock />
                 <NavbarBrand href="/" style={{ "color": "tomato" }} className="font-monospace">
                     <img
                         alt="logo"
@@ -37,11 +38,11 @@ export const ParticipantView = () => {
                         }}
                     />
                 </NavbarBrand>
-                <Link to="/" className="btn" style={{"background-color":"tomato","color":"white"}}>
+                <Link to="/" className="btn" style={{ "background-color": "tomato", "color": "white" }}>
                     Log Out
                 </Link>
-            </Navbar>   
-            <div className='container text-center'>
+            </Navbar>
+            {/* <div className='container text-center'>
                 <div class='row'>
                     <div class='col border border-secondary'>
                         Team - {team_name}
@@ -58,6 +59,28 @@ export const ParticipantView = () => {
                         </ul>
                     </div>
                 </div>
+            </div> */}
+            <div>
+            <Button
+                id="Popover1"
+                type="button"
+                onClick={() => setTrigger(!trigger)}
+            >
+                Team Details
+            </Button>
+            <Popover
+                flip
+                isOpen={trigger}
+                target="Popover1"
+                toggle={trigger}
+            >
+                <PopoverHeader>
+                   Team Details
+                </PopoverHeader>
+                <PopoverBody>
+                    
+                </PopoverBody>
+            </Popover>
             </div>
             <Card style={{ "margin-left": "28%", "width": "40%", "margin-top": "10%" }}>
                 <CardHeader>

@@ -1,8 +1,53 @@
-import { useNavigate } from 'react-router-dom'
+import {useState,React} from 'react'
+import { useNavigate,Link } from 'react-router-dom'
 import { Table, Form, FormGroup, Label, Input, Col, Button, FormText, FormFeedback, Navbar, NavbarBrand } from 'reactstrap'
 import IncedoLogo from './incedo-logo.png'
+import axios from 'axios'
+
+const home ='';
 const RegistrationForm = () => {
     const Navigate = useNavigate();
+    const [table,setTable] = useState("");
+    const [username,setUsername]=useState("");
+    const [password,setPassword]=useState("");
+    const [domain,setDomain]=useState("");
+
+    const handleSubmit = () => {
+        axios.post('https://localhost:8080/user',{
+          username,
+          password,
+          domain,
+          numberofmembers : {table}
+        })
+          .then(function (response) {
+            console.log(response);
+            Navigate('/login');
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    
+      }    
+    const fourthRow = (table) =>{
+          if(table === "3")
+          return <></>
+          else
+          return (
+            <>
+             <tr>
+                                <th scope="row">
+                                    4
+                                </th>
+                                <td>
+                                    <Input placeholder='name'/>
+                                </td>
+                                <td>
+                                    <Input placeholder='email' type='email'/>
+                                </td>
+                            </tr>
+            </>
+          )
+    }
     return (
         <>
             <Navbar
@@ -33,6 +78,8 @@ const RegistrationForm = () => {
                                 id="exampleEmail"
                                 name="team-name"
                                 placeholder="Enter your Team name"
+                                onChange= {(e) => {setUsername(e.target.value)}}
+                                valid
                             />
                             <FormFeedback valid>
                                 Sweet! that name is available
@@ -52,8 +99,28 @@ const RegistrationForm = () => {
                                 name="password"
                                 placeholder="password"
                                 type="password"
+                                onChange={(e) => setPassword(setPassword)}
                             />
                         </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                        <Label
+                            for="examplePassword"
+                            sm={2}
+                        >
+                            Confirm Password
+                        </Label>
+                        <Col sm={10}>
+                            <Input
+                                id="examplePassword"
+                                name="password"
+                                placeholder="confirm password"
+                                type="password"
+                            />
+                        </Col>
+                        <FormFeedback valid>
+                            Password Matched
+                        </FormFeedback>
                     </FormGroup>
                     <FormGroup row>
                         <Label
@@ -67,9 +134,10 @@ const RegistrationForm = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
+                                onChange= {(e) => (setDomain())}
                             >
                                 <option>
-
+                                    None
                                 </option>
                                 <option>
                                     Web Development
@@ -101,6 +169,7 @@ const RegistrationForm = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
+                                onChange={(e) => {setTable(e.target.value)}}
                             >
                                 <option>
                                     3
@@ -162,18 +231,19 @@ const RegistrationForm = () => {
                                        <Input placeholder='email' type='email'/>
                                     </td>
                                 </tr>
+                                {fourthRow(table)}
                             </tbody>
+                            
+
                         </Table>
                     </FormGroup>
                     <FormGroup row>
                         <Col className='text-start'>
-                            <Button color='warning' onClick={()=>Navigate('/login')}>
-                                Back
-                            </Button>
+                          <Link to='/' className="btn btn-warning">Back</Link>
                         </Col>
                         <Col className='text-end'>
-                            <Button color='success' onClick={()=>Navigate('/login')}>
-                                Next
+                            <Button color='success' onClick={handleSubmit}>
+                                Submit
                             </Button>
                         </Col>
                     </FormGroup>

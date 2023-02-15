@@ -13,11 +13,11 @@ const RegistrationForm = () => {
     const [domain,setDomain]=useState("");
 
     const handleSubmit = () => {
-        axios.post('https://localhost:8080/user',{
+        axios.post("https://jsonplaceholder.typicode.com/posts",{
           username,
-          password,
-          domain,
-          numberofmembers : {table}
+          pass:{password},
+          d:{domain},
+          m:{table}
         })
           .then(function (response) {
             console.log(response);
@@ -134,7 +134,7 @@ const RegistrationForm = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                onChange= {(e) => (setDomain())}
+                                onChange= {(e) => (setDomain(e.target.value))}
                             >
                                 <option>
                                     None

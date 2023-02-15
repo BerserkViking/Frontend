@@ -6,6 +6,7 @@ import {
 import { Link } from 'react-router-dom'
 import IncedoLogo from './incedo-logo.png'
 
+
 import Clock from '../clock';
 
 var member1 = "Dhruv";
@@ -28,7 +29,6 @@ export const ParticipantView = () => {
                 className="my-2 fs-4"
                 style={{ "background-color": "#281E5D" }}
             >
-                <Clock />
                 <NavbarBrand href="/" style={{ "color": "tomato" }} className="font-monospace">
                     <img
                         alt="logo"
@@ -38,50 +38,50 @@ export const ParticipantView = () => {
                         }}
                     />
                 </NavbarBrand>
-                <Link to="/" className="btn" style={{ "background-color": "tomato", "color": "white" }}>
-                    Log Out
-                </Link>
-            </Navbar>
-            {/* <div className='container text-center'>
-                <div class='row'>
-                    <div class='col border border-secondary'>
-                        Team - {team_name}
-                        <ul>
-                            <ul> {member1}</ul>
-                            <ul> {member2}</ul>
-                            <ul> {member3}</ul>
-                        </ul>
-                    </div>
-                    <div className='col border border-secondary'>
-                        <ul>
-                            <ul>Status :{possible_status[0]}</ul>
-                            <ul>Panelist Assigned : {panelist_assigned}</ul>
-                        </ul>
-                    </div>
-                </div>
-            </div> */}
-            <div>
+                
+                <div className='col-3'>
+                
             <Button
                 id="Popover1"
                 type="button"
+                className='btn'
+                style= {{"backgroundColor":"tomato","marginLeft":'0%'}}
                 onClick={() => setTrigger(!trigger)}
             >
-                Team Details
+                Team Info
             </Button>
             <Popover
                 flip
                 isOpen={trigger}
                 target="Popover1"
                 toggle={trigger}
+                placement="bottom"
+                trigger='click'
             >
-                <PopoverHeader>
-                   Team Details
-                </PopoverHeader>
-                <PopoverBody>
-                    
+                <PopoverBody className='text-center'>
+                    <h3>{team_name}</h3>
+                    <div> status : {possible_status[0]}</div>
+                     <div>Panelist_Assigned : {panelist_assigned}</div>
+                     <div>
+                     <ul>
+                        <ul>Team Members</ul>
+                        <ul>Dhruv Kumar Sharma</ul>
+                        <ul>Dhruv Kumar Sharma</ul>
+                        <ul>Dhruv Kumar Sharma</ul>
+                        <ul>Dhruv Kumar Sharma</ul>
+                     </ul>
+                     </div>
+               
                 </PopoverBody>
             </Popover>
+                <Link to="/" className="btn " style={{ "background-color": "tomato", "color": "white" ,"margin-left":"40%"}}>
+                    Log Out
+                </Link>
             </div>
+        
+                               
+            </Navbar>
+            
             <Card style={{ "margin-left": "28%", "width": "40%", "margin-top": "10%" }}>
                 <CardHeader>
                     Project Details

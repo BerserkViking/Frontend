@@ -12,7 +12,7 @@ const LoginPage = () => {
 
 
   const handleSubmit = () => {
-    axios.post('https://localhost:8080/user',{
+    axios.post("https://jsonplaceholder.typicode.com/posts",{
       email: {userName},
       pass: {password}
     })

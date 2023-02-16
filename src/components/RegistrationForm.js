@@ -1,52 +1,54 @@
-import {useState,React} from 'react'
-import { useNavigate,Link } from 'react-router-dom'
+import { useState, React } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import { Table, Form, FormGroup, Label, Input, Col, Button, FormText, FormFeedback, Navbar, NavbarBrand } from 'reactstrap'
 import IncedoLogo from './incedo-logo.png'
 import axios from 'axios'
 
-const home ='';
+const home = '';
 const RegistrationForm = () => {
     const Navigate = useNavigate();
-    const [table,setTable] = useState("");
-    const [username,setUsername]=useState("");
-    const [password,setPassword]=useState("");
-    const [domain,setDomain]=useState("");
+    const [memberCount, setTable] = useState("");
+    const [teamName, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [domain, setDomain] = useState("");
+    const [projectTitle, setProjectTitle] = useState("");
 
     const handleSubmit = () => {
-        axios.post("https://jsonplaceholder.typicode.com/posts",{
-          username,
-          pass:{password},
-          d:{domain},
-          m:{table}
+        axios.post("http://localhost:8080/api/register/", {
+            teamName,
+            password,
+            domain,
+            memberCount,
+            projectTitle
         })
-          .then(function (response) {
-            console.log(response);
-            Navigate('/login');
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-    
-      }    
-    const fourthRow = (table) =>{
-          if(table === "3")
-          return <></>
-          else
-          return (
-            <>
-             <tr>
-                                <th scope="row">
-                                    4
-                                </th>
-                                <td>
-                                    <Input placeholder='name'/>
-                                </td>
-                                <td>
-                                    <Input placeholder='email' type='email'/>
-                                </td>
-                            </tr>
-            </>
-          )
+            .then(function (response) {
+                console.log(response);
+                Navigate('/login');
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+    const fourthRow = (table) => {
+        if (table === "3")
+            return <></>
+        else
+            return (
+                <>
+                    <tr>
+                        <th scope="row">
+                            4
+                        </th>
+                        <td>
+                            <Input placeholder='name' />
+                        </td>
+                        <td>
+                            <Input placeholder='email' type='email' />
+                        </td>
+                    </tr>
+                </>
+            )
     }
     return (
         <>
@@ -55,13 +57,13 @@ const RegistrationForm = () => {
                 style={{ "background-color": "#281E5D" }}
             >
                 <NavbarBrand href="/" style={{ "color": "tomato" }} className="font-monospace">
-                <img
-        alt="logo"
-        src={IncedoLogo}
-        style={{
-          "width":"50%"
-        }}
-      />
+                    <img
+                        alt="logo"
+                        src={IncedoLogo}
+                        style={{
+                            "width": "50%"
+                        }}
+                    />
                 </NavbarBrand>
             </Navbar>
             <div style={{ "width": "60%", "margin-top": "3%", "padding": "1%", "border": "2px solid #281E5D" }} className="mx-auto">
@@ -78,7 +80,7 @@ const RegistrationForm = () => {
                                 id="exampleEmail"
                                 name="team-name"
                                 placeholder="Enter your Team name"
-                                onChange= {(e) => {setUsername(e.target.value)}}
+                                onChange={(e) => { setUsername(e.target.value) }}
                                 valid
                             />
                             <FormFeedback valid>
@@ -98,12 +100,12 @@ const RegistrationForm = () => {
                                 id="examplePassword"
                                 name="password"
                                 placeholder="password"
-                                type="password"
-                                onChange={(e) => setPassword(setPassword)}
+                                // type="password"
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </Col>
-                        </FormGroup>
-                        <FormGroup row>
+                    </FormGroup>
+                    <FormGroup row>
                         <Label
                             for="examplePassword"
                             sm={2}
@@ -124,6 +126,16 @@ const RegistrationForm = () => {
                     </FormGroup>
                     <FormGroup row>
                         <Label
+                            sm={2}
+                        >
+                            Project Title
+                        </Label>
+                        <Col sm={10}>
+                            <Input  placeholder="project title" onChange={(e) => setProjectTitle(e.target.value)} />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label
                             for="exampleSelect"
                             sm={2}
                         >
@@ -134,16 +146,16 @@ const RegistrationForm = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                onChange= {(e) => (setDomain(e.target.value))}
+                                onChange={(e) => (setDomain(e.target.value))}
                             >
                                 <option>
                                     None
                                 </option>
                                 <option>
-                                    Web Development
+                                    Web
                                 </option>
                                 <option>
-                                    Artificial Intellingence/Machine Learning
+                                    Artificial
                                 </option>
                                 <option>
                                     Blockchain
@@ -152,7 +164,7 @@ const RegistrationForm = () => {
                                     Cybersecurity
                                 </option>
                                 <option>
-                                    Hardware and Networking
+                                    Hardware
                                 </option>
                             </Input>
                         </Col>
@@ -169,8 +181,11 @@ const RegistrationForm = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                onChange={(e) => {setTable(e.target.value)}}
+                                onChange={(e) => { setTable(e.target.value) }}
                             >
+                                <option>
+                                    None
+                                </option>
                                 <option>
                                     3
                                 </option>
@@ -180,7 +195,7 @@ const RegistrationForm = () => {
                             </Input>
                         </Col>
                     </FormGroup>
-                   
+
                     <FormGroup row>
                         <Label>Member Details</Label>
                         <Table>
@@ -190,10 +205,10 @@ const RegistrationForm = () => {
                                         #
                                     </th>
                                     <th>
-                                      Name
+                                        Name
                                     </th>
                                     <th>
-                                      email
+                                        email
                                     </th>
                                 </tr>
                             </thead>
@@ -203,10 +218,10 @@ const RegistrationForm = () => {
                                         1
                                     </th>
                                     <td>
-                                        <Input placeholder='name'/>
+                                        <Input placeholder='name' />
                                     </td>
                                     <td>
-                                       <Input placeholder='email' type='email'/>
+                                        <Input placeholder='email' type='email' />
                                     </td>
                                 </tr>
                                 <tr>
@@ -214,10 +229,10 @@ const RegistrationForm = () => {
                                         2
                                     </th>
                                     <td>
-                                        <Input placeholder='name'/>
+                                        <Input placeholder='name' />
                                     </td>
                                     <td>
-                                       <Input placeholder='email' type='email'/>
+                                        <Input placeholder='email' type='email' />
                                     </td>
                                 </tr>
                                 <tr>
@@ -225,21 +240,21 @@ const RegistrationForm = () => {
                                         3
                                     </th>
                                     <td>
-                                        <Input placeholder='name'/>
+                                        <Input placeholder='name' />
                                     </td>
                                     <td>
-                                       <Input placeholder='email' type='email'/>
+                                        <Input placeholder='email' type='email' />
                                     </td>
                                 </tr>
-                                {fourthRow(table)}
+                                {fourthRow(memberCount)}
                             </tbody>
-                            
+
 
                         </Table>
                     </FormGroup>
                     <FormGroup row>
                         <Col className='text-start'>
-                          <Link to='/' className="btn btn-warning">Back</Link>
+                            <Link to='/' className="btn btn-warning">Back</Link>
                         </Col>
                         <Col className='text-end'>
                             <Button color='success' onClick={handleSubmit}>
@@ -248,7 +263,7 @@ const RegistrationForm = () => {
                         </Col>
                     </FormGroup>
                 </Form>
-                </div>
+            </div>
         </>
     )
 }

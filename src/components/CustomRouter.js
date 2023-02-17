@@ -1,9 +1,11 @@
 import {Routes,Route} from 'react-router-dom'
 import  {HackathonPage}  from './HackathonPage'
 import  LoginPage  from './LoginPage'
+import { RegistrationFinal } from './RegistrationFinal'
 import RegistrationForm from './RegistrationForm'
 import { PanelistView } from './views/PanelistView'
 import { ParticipantView } from './views/ParticipantView'
+import { ViewAdmin } from './views/ViewAdmin'
 
 export const CustomRouter = () => {
   return (
@@ -13,6 +15,8 @@ export const CustomRouter = () => {
     <Route path='' element={<HackathonPage/>}></Route>
     <Route path='/participant-view' element={<ParticipantView/>}></Route>
     <Route path='/panelist-view' element={<PanelistView/>}></Route>
+    <Route path='/admin' element={<ViewAdmin/>}></Route>
+    <Route path='/register-feedback' element={<RegistrationFinal/>}></Route>
   </Routes>
   )
 }

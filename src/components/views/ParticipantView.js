@@ -82,7 +82,7 @@ export const ParticipantView = () => {
                                
             </Navbar>
             
-            <Card style={{ "margin-left": "28%", "width": "40%", "margin-top": "10%" }}>
+            <Card className="col-5 mx-auto" style={{ "marginTop": "5%" }}>
                 <CardHeader>
                     Project Details
                 </CardHeader>

@@ -1,6 +1,6 @@
 import {React , useState} from 'react'
 import IncedoLogo from './views/incedo-logo.png'
-import { FormGroup, Navbar, NavbarBrand, Label, Input, Form, Button } from 'reactstrap'
+import { FormGroup, Navbar, NavbarBrand, Label, Input, Form, Button ,Col } from 'reactstrap'
 import axios from 'axios'
 import { Link, useNavigate} from 'react-router-dom'
 
@@ -13,8 +13,8 @@ const LoginPage = () => {
 
   const handleSubmit = () => {
     axios.post("https://jsonplaceholder.typicode.com/posts",{
-      email: {userName},
-      pass: {password}
+      userName,
+      password
     })
       .then(function (response) {
         console.log(response);
@@ -44,28 +44,30 @@ const LoginPage = () => {
           />
         </NavbarBrand>
       </Navbar>
-      <Form className='col-2  mx-auto '>
+      <Form className='col-3  mx-auto' data-toggle="validator">
         <FormGroup>
           <Label>
             Team-Name/Username
           </Label>
-          <Input placeholder='Username' onChange={(e) => setUserName(e.target.value)} />
+          <Input placeholder='Username' onChange={(e) => setUserName(e.target.value)}/>
         </FormGroup>
         <FormGroup>
           <Label>
             Password
           </Label>
+          <Col>
           <Input placeholder='Password' type='Password'onChange={(e) => setPassword(e.target.value)} />
+          </Col>
         </FormGroup>
         <FormGroup>
           <Label className='text-start'>Participant</Label>
-          <Input name="radio1" type="radio" value='/participant-view' onChange={(e) => setTarget(e.target.value)} />
-          <Label style={{ "margin-left": "15%" }}>Organizer</Label>
-          <Input name="radio1" type="radio" value='/panelist-view' onChange={(e)=> setTarget(e.target.value)} />
+          <Input style={{"marginLeft":"2%"}} name="radio1" type="radio" value='/participant-view' onChange={(e) => setTarget(e.target.value)} />
+          <Label style={{ "margin-left": "11%" }}>Organizer</Label>
+          <Input style={{"marginLeft":"2%"}} name="radio1" type="radio" value='/panelist-view' onChange={(e)=> setTarget(e.target.value)} />
         </FormGroup>
         <Button class="btn btn-success mx-auto" onClick={handleSubmit}>Login</Button>
       </Form>
-
+     
     </>
   )
 }

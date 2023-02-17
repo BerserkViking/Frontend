@@ -37,7 +37,7 @@ export const HackathonPage = () => {
             people together to improve upon or build a new software program. The word hackathon is a portmanteau of the words hac
             ker, which means clever programmer, and marathon, an event marked by endurance.The concept of the hackathon, also call
           </CardText>
-        </CardBody>
+        </CardBody> 
       </Card>
     </>
   )

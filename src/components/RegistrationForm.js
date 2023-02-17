@@ -1,10 +1,9 @@
 import { useState, React } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { Table, Form, FormGroup, Label, Input, Col, Button, FormText, FormFeedback, Navbar, NavbarBrand } from 'reactstrap'
+import { Table, Form, FormGroup, Label, Input, Col, Button, FormFeedback, Navbar, NavbarBrand } from 'reactstrap'
 import IncedoLogo from './incedo-logo.png'
 import axios from 'axios'
 
-const home = '';
 const RegistrationForm = () => {
     const Navigate = useNavigate();
     const [memberCount, setTable] = useState("");
@@ -14,7 +13,7 @@ const RegistrationForm = () => {
     const [projectTitle, setProjectTitle] = useState("");
 
     const handleSubmit = () => {
-        axios.post("http://localhost:8080/api/register/", {
+        axios.post("https://jsonplaceholder.typicode.com/posts/", {
             teamName,
             password,
             domain,
@@ -22,36 +21,153 @@ const RegistrationForm = () => {
             projectTitle
         })
             .then(function (response) {
-                console.log(response);
-                Navigate('/login');
+                console.log(response)
+                Navigate('/register-feedback')
             })
             .catch(function (error) {
                 console.log(error);
             });
 
     }
+
     const fourthRow = (table) => {
+       
         if (table === "3")
-            return <></>
-        else
             return (
                 <>
-                    <tr>
-                        <th scope="row">
-                            4
-                        </th>
-                        <td>
-                            <Input placeholder='name' />
-                        </td>
-                        <td>
-                            <Input placeholder='email' type='email' />
-                        </td>
-                    </tr>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    email
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    1
+                                </th>
+                                <td>
+                                    <Input placeholder='name' required />
+                                </td>
+                                <td>
+                                    <Input placeholder='email' type='email' required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    2
+                                </th>
+                                <td>
+                                    <Input placeholder='name' required />
+                                </td>
+                                <td>
+                                    <Input placeholder='email' type='email' required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    3
+                                </th>
+                                <td>
+                                    <Input placeholder='name' required />
+                                </td>
+                                <td>
+                                    <Input placeholder='email' type='email' required />
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+
+                    </Table>
                 </>
             )
+        if(memberCount==='4')
+        {    
+            return (
+                <>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    email
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    1
+                                </th>
+                                <td>
+                                    <Input placeholder='name' required />
+                                </td>
+                                <td>
+                                    <Input placeholder='email' type='email' required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    2
+                                </th>
+                                <td>
+                                    <Input placeholder='name' required />
+                                </td>
+                                <td>
+                                    <Input placeholder='email' type='email' required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    3
+                                </th>
+                                <td>
+                                    <Input placeholder='name' required />
+                                </td>
+                                <td>
+                                    <Input placeholder='email' type='email' required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    4
+                                </th>
+                                <td>
+                                    <Input placeholder='name' />
+                                </td>
+                                <td>
+                                    <Input placeholder='email' type='email' />
+                                </td>
+                            </tr>
+                        </tbody>
+
+
+                    </Table>
+                </>
+            )
+        }
+        if(memberCount==="none")
+        return(<></>)
     }
+
     return (
         <>
+
+
             <Navbar
                 className="my-2 fs-4"
                 style={{ "background-color": "#281E5D" }}
@@ -67,8 +183,8 @@ const RegistrationForm = () => {
                 </NavbarBrand>
             </Navbar>
             <div style={{ "width": "60%", "margin-top": "3%", "padding": "1%", "border": "2px solid #281E5D" }} className="mx-auto">
-                <Form>
-                    <FormGroup row>
+                <Form >
+                    <FormGroup row >
                         <Label
                             for="exampleEmail"
                             sm={2}
@@ -77,17 +193,14 @@ const RegistrationForm = () => {
                         </Label>
                         <Col sm={10}>
                             <Input
-                                id="exampleEmail"
-                                name="team-name"
                                 placeholder="Enter your Team name"
                                 onChange={(e) => { setUsername(e.target.value) }}
-                                valid
+
+                                required
                             />
-                            <FormFeedback valid>
-                                Sweet! that name is available
-                            </FormFeedback>
                         </Col>
                     </FormGroup>
+               
                     <FormGroup row>
                         <Label
                             for="examplePassword"
@@ -100,10 +213,12 @@ const RegistrationForm = () => {
                                 id="examplePassword"
                                 name="password"
                                 placeholder="password"
-                                // type="password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                type="password"
+                                onChange={(e) => setPassword(e.target.value)} 
+                                required
                             />
                         </Col>
+                        <br/>
                     </FormGroup>
                     <FormGroup row>
                         <Label
@@ -118,7 +233,11 @@ const RegistrationForm = () => {
                                 name="password"
                                 placeholder="confirm password"
                                 type="password"
+                                required="true"
                             />
+                            <FormFeedback required>
+                                This field is required!
+                            </FormFeedback>
                         </Col>
                         <FormFeedback valid>
                             Password Matched
@@ -131,7 +250,11 @@ const RegistrationForm = () => {
                             Project Title
                         </Label>
                         <Col sm={10}>
-                            <Input  placeholder="project title" onChange={(e) => setProjectTitle(e.target.value)} />
+                            <Input
+                                placeholder="project title"
+                                onChange={(e) => setProjectTitle(e.target.value)}
+                                required
+                            />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
@@ -147,6 +270,7 @@ const RegistrationForm = () => {
                                 name="select"
                                 type="select"
                                 onChange={(e) => (setDomain(e.target.value))}
+                                required
                             >
                                 <option>
                                     None
@@ -182,9 +306,10 @@ const RegistrationForm = () => {
                                 name="select"
                                 type="select"
                                 onChange={(e) => { setTable(e.target.value) }}
+                                required
                             >
                                 <option>
-                                    None
+                                    none
                                 </option>
                                 <option>
                                     3
@@ -198,66 +323,14 @@ const RegistrationForm = () => {
 
                     <FormGroup row>
                         <Label>Member Details</Label>
-                        <Table>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        #
-                                    </th>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th>
-                                        email
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        1
-                                    </th>
-                                    <td>
-                                        <Input placeholder='name' />
-                                    </td>
-                                    <td>
-                                        <Input placeholder='email' type='email' />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        2
-                                    </th>
-                                    <td>
-                                        <Input placeholder='name' />
-                                    </td>
-                                    <td>
-                                        <Input placeholder='email' type='email' />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        3
-                                    </th>
-                                    <td>
-                                        <Input placeholder='name' />
-                                    </td>
-                                    <td>
-                                        <Input placeholder='email' type='email' />
-                                    </td>
-                                </tr>
-                                {fourthRow(memberCount)}
-                            </tbody>
-
-
-                        </Table>
+                        {fourthRow(memberCount)}
                     </FormGroup>
                     <FormGroup row>
                         <Col className='text-start'>
                             <Link to='/' className="btn btn-warning">Back</Link>
-                        </Col>
+                        </Col> 
                         <Col className='text-end'>
-                            <Button color='success' onClick={handleSubmit}>
+                            <Button type="submit" color='success' onClick={{handleSubmit}} >
                                 Submit
                             </Button>
                         </Col>
@@ -266,6 +339,10 @@ const RegistrationForm = () => {
             </div>
         </>
     )
+
+
+
+
 }
 
 export default RegistrationForm;

@@ -7,6 +7,7 @@ import { EventPanel } from './eventPanel'
 import { DomainCard } from './DomainCard'
 import './style.css'
 import logone from './Images/AI_ML_icon.png'
+import logtwo from './Images/web_development.png'
 
 var member1 = "Dhruv";
 var member2 = "Utkarsh";
@@ -54,11 +55,21 @@ export const HackathonPage = () => {
           <PopoverBody>
             <div className='container'>
            <div className='row'>
-            <div className='col'>
+            <div className='col-3'>
              <img src={logone} alt="aiml-icon" className='img-fluid'/>
             </div>
             <div className='col'>
             Artificial Intelligence/Machine Learning
+            </div>
+           </div>
+           </div>
+           <div className='container'>
+           <div className='row'>
+            <div className='col-3'>
+             <img src={logtwo} alt="webdev-icon" className='img-fluid'/>
+            </div>
+            <div className='col'>
+            Web Development
             </div>
            </div>
            </div>

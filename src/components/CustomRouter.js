@@ -6,7 +6,7 @@ import RegistrationForm from './RegistrationForm'
 import { PanelistView } from './views/PanelistView'
 import { ParticipantView } from './views/ParticipantView'
 import { ViewAdmin } from './views/ViewAdmin'
-
+import { RegisterMember } from './MemberRegistration'
 export const CustomRouter = () => {
   return (
     <Routes>
@@ -17,6 +17,7 @@ export const CustomRouter = () => {
     <Route path='/panelist-view' element={<PanelistView/>}></Route>
     <Route path='/admin' element={<ViewAdmin/>}></Route>
     <Route path='/register-feedback' element={<RegistrationFinal/>}></Route>
+    <Route path='/register-member' element={<RegisterMember/>}></Route>
   </Routes>
   )
 }

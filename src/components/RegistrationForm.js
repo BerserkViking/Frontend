@@ -9,8 +9,8 @@ const RegistrationForm = () => {
     const [memberCount, setTable] = useState("");
     const [teamName, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [cpassword,setCnfPassword]=useState("");
     const [domain, setDomain] = useState("");
+    const [cpassword,setCnfPassword]=useState("");
     const [projectTitle, setProjectTitle] = useState("");
 
     const handleSubmit = () => {
@@ -219,7 +219,7 @@ const RegistrationForm = () => {
                                 required
                             />
                         </Col>
-                        <br/>
+                        
                     </FormGroup>
                     <FormGroup row>
                         <Label
@@ -235,17 +235,20 @@ const RegistrationForm = () => {
                                 placeholder="confirm password"
                                 type="password"
                                 required="true"
-                                onChange={(e) =>setCnfPassword(e.target.value)}
-                                valid={password === cpassword}
-                                invalid={password !== cpassword}
+                                onChange={(e)=>setCnfPassword(e.target.value)}
+                                valid = {password === cpassword}
+                                invalid= {password !== cpassword}
                             />
                             <FormFeedback valid>
+                                passwords are matched
+                            </FormFeedback>
+                            <FormFeedback invalid>
+                                passwords are not matched
+                            </FormFeedback>
+                        </Col>
+                        <FormFeedback valid>
                             Password Matched
                         </FormFeedback>
-                        <FormFeedback invalid>
-                            Password Not matched
-                        </FormFeedback>
-                        </Col>
                     </FormGroup>
                     <FormGroup row>
                         <Label

@@ -33,9 +33,7 @@ export const ParticipantView = () => {
                     <img
                         alt="logo"
                         src={IncedoLogo}
-                        style={{
-                            "width": "50%"
-                        }}
+                        className="img-fluid"
                     />
                 </NavbarBrand>
                 

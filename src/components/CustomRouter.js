@@ -7,6 +7,9 @@ import { PanelistView } from './views/PanelistView'
 import { ParticipantView } from './views/ParticipantView'
 import { ViewAdmin } from './views/ViewAdmin'
 import { RegisterMember } from './MemberRegistration'
+import { EvaluationView } from './views/EvaluationView'
+import { IdeaSubmission } from './IdeaSubmission'
+import { Leaderboard } from './views/Leaderboard'
 export const CustomRouter = () => {
   return (
     <Routes>
@@ -18,6 +21,9 @@ export const CustomRouter = () => {
     <Route path='/admin' element={<ViewAdmin/>}></Route>
     <Route path='/register-feedback' element={<RegistrationFinal/>}></Route>
     <Route path='/register-member' element={<RegisterMember/>}></Route>
+    <Route path='/judge' element={<EvaluationView/>}></Route>
+    <Route path='/idea-submission' element={<IdeaSubmission/>}></Route>
+    <Route path='/leaderboard' element={<Leaderboard/>}></Route>
   </Routes>
   )
 }

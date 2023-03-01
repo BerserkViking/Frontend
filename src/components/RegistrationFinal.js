@@ -18,9 +18,12 @@ export const RegistrationFinal = () => {
           />
         </NavbarBrand>
       </Navbar>
-      <div className="text-center mx-auto col-6 border border-3 border dark" style={{ "marginTop": "15%" }}>
-        Success You Have Successfully Registered<br />
+      <div className="text-center mx-auto col-6 myborder fs-3 font-monospace text-decoration-underline" style={{ marginTop: "15%"}}>
+        
+
+        You Have Successfully Registered<br />
         Head to the <Link to="/login" className='link-success'>login Page</Link>
+
       </div>
     </>
   )

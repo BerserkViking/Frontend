@@ -1,6 +1,6 @@
 import { useState, React } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import { Table, Form, FormGroup, Label, Input, Col, Button, FormFeedback, Navbar, NavbarBrand } from 'reactstrap'
+import { useNavigate } from 'react-router-dom'
+import { Table, Form, FormGroup, Label, Input, Col, Button, FormFeedback, Navbar, NavbarBrand, Container } from 'reactstrap'
 import IncedoLogo from './incedo-logo.png'
 import axios from 'axios'
 
@@ -10,11 +10,33 @@ const RegistrationForm = () => {
     const [teamName, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [domain, setDomain] = useState("");
-    const [cpassword,setCnfPassword]=useState("");
+    const [cpassword, setCnfPassword] = useState("");
     const [projectTitle, setProjectTitle] = useState("");
+    let [members, setmembers] = useState([{
+        name: "",
+        email: ""
+    }, { name: "", email: "" }, { name: "", email: "" }, { name: "", email: "" }]);
+
+    const handleChange = (e, idx) => {
+        const field = e.target.name;
+        const value = e.target.value;
+        let tempMembers = members;
+        tempMembers[idx] = {
+            ...tempMembers[idx],
+            [field]: value
+        };
+        setmembers(tempMembers);
+
+    }
 
     const handleSubmit = () => {
-        axios.post("https://jsonplaceholder.typicode.com/posts/", {
+        localStorage.setItem('teamName', teamName);
+        console.log(teamName);
+        if (memberCount === "3") {
+            members.pop();
+        }
+
+        axios.post("http://15.206.136.106:443/api/register/", {
             teamName,
             password,
             domain,
@@ -22,21 +44,36 @@ const RegistrationForm = () => {
             projectTitle
         })
             .then(function (response) {
-                console.log(response)
-                Navigate('/register-feedback')
+                console.log(response.data)
+                axios.post("http://15.206.136.106:443/api/members/", {
+                    teamName,
+                    members
+                })
+                    .then(function (response) {
+
+
+                        console.log(response)
+                        Navigate('/idea-submission')
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
             })
             .catch(function (error) {
                 console.log(error);
             });
 
+
     }
 
+
+
     const fourthRow = (table) => {
-       
         if (table === "3")
             return (
                 <>
-                    <Table>
+                    <Table bordered className='border border-dark border-1 '>
                         <thead>
                             <tr>
                                 <th>
@@ -56,10 +93,10 @@ const RegistrationForm = () => {
                                     1
                                 </th>
                                 <td>
-                                    <Input placeholder='name' required />
+                                    <Input placeholder='name' name="name" onChange={(e) => handleChange(e, 0)} required />
                                 </td>
                                 <td>
-                                    <Input placeholder='email' type='email' required />
+                                    <Input placeholder='email' name="email" type='email' onChange={(e) => handleChange(e, 0)} required />
                                 </td>
                             </tr>
                             <tr>
@@ -67,10 +104,10 @@ const RegistrationForm = () => {
                                     2
                                 </th>
                                 <td>
-                                    <Input placeholder='name' required />
+                                    <Input placeholder='name' name="name" onChange={(e) => handleChange(e, 1)} required />
                                 </td>
                                 <td>
-                                    <Input placeholder='email' type='email' required />
+                                    <Input placeholder='email' name="email" type='email' onChange={(e) => handleChange(e, 1)} required />
                                 </td>
                             </tr>
                             <tr>
@@ -78,12 +115,13 @@ const RegistrationForm = () => {
                                     3
                                 </th>
                                 <td>
-                                    <Input placeholder='name' required />
+                                    <Input placeholder='name' name="name" onChange={(e) => handleChange(e, 2)} required />
                                 </td>
                                 <td>
-                                    <Input placeholder='email' type='email' required />
+                                    <Input placeholder='email' name="email" type='email' onChange={(e) => handleChange(e, 2)} required />
                                 </td>
                             </tr>
+
 
                         </tbody>
 
@@ -91,11 +129,10 @@ const RegistrationForm = () => {
                     </Table>
                 </>
             )
-        if(memberCount==='4')
-        {    
+        if (memberCount === '4') {
             return (
                 <>
-                    <Table>
+                    <Table bordered className='border border-dark'>
                         <thead>
                             <tr>
                                 <th>
@@ -115,10 +152,10 @@ const RegistrationForm = () => {
                                     1
                                 </th>
                                 <td>
-                                    <Input placeholder='name' required />
+                                    <Input placeholder='name' name="name" onChange={(e) => handleChange(e, 0)} required />
                                 </td>
                                 <td>
-                                    <Input placeholder='email' type='email' required />
+                                    <Input placeholder='email' name="email" type='email' onChange={(e) => handleChange(e, 0)} required />
                                 </td>
                             </tr>
                             <tr>
@@ -126,10 +163,10 @@ const RegistrationForm = () => {
                                     2
                                 </th>
                                 <td>
-                                    <Input placeholder='name' required />
+                                    <Input placeholder='name' name="name" onChange={(e) => handleChange(e, 1)} required />
                                 </td>
                                 <td>
-                                    <Input placeholder='email' type='email' required />
+                                    <Input placeholder='email' name="email" type='email' onChange={(e) => handleChange(e, 1)} required />
                                 </td>
                             </tr>
                             <tr>
@@ -137,10 +174,10 @@ const RegistrationForm = () => {
                                     3
                                 </th>
                                 <td>
-                                    <Input placeholder='name' required />
+                                    <Input placeholder='name' name="name" onChange={(e) => handleChange(e, 2)} required />
                                 </td>
                                 <td>
-                                    <Input placeholder='email' type='email' required />
+                                    <Input placeholder='email' name="email" type='email' onChange={(e) => handleChange(e, 2)} required />
                                 </td>
                             </tr>
                             <tr>
@@ -148,26 +185,27 @@ const RegistrationForm = () => {
                                     4
                                 </th>
                                 <td>
-                                    <Input placeholder='name' />
+                                    <Input placeholder='name' name="name" onChange={(e) => handleChange(e, 3)} required />
                                 </td>
                                 <td>
-                                    <Input placeholder='email' type='email' />
+                                    <Input placeholder='email' name="email" type='email' onChange={(e) => handleChange(e, 3)} required />
                                 </td>
                             </tr>
+
+
                         </tbody>
+
 
 
                     </Table>
                 </>
             )
         }
-        if(memberCount==="none")
-        return(<></>)
+        if (memberCount === "none")
+            return (<></>)
     }
-
     return (
         <>
-
 
             <Navbar
                 className="my-2 fs-4"
@@ -183,12 +221,15 @@ const RegistrationForm = () => {
                     />
                 </NavbarBrand>
             </Navbar>
-            <div style={{ "width": "60%", "margin-top": "3%", "padding": "1%", "border": "2px solid #281E5D" }} className="mx-auto">
+            <div className='text-center mt-3'>
+            <h4 className='fw-bold font-monospace'>Registration Form</h4>
+            </div>
+            <div style={{ "width": "60%", "marginTop": "3%", "padding": "1%", "border": "2px solid #281E5D" }} className="mx-auto">
                 <Form >
                     <FormGroup row >
                         <Label
                             for="exampleEmail"
-                            sm={2}
+                            sm={2}  
                         >
                             Team Name
                         </Label>
@@ -201,7 +242,7 @@ const RegistrationForm = () => {
                             />
                         </Col>
                     </FormGroup>
-               
+
                     <FormGroup row>
                         <Label
                             for="examplePassword"
@@ -215,11 +256,11 @@ const RegistrationForm = () => {
                                 name="password"
                                 placeholder="password"
                                 type="password"
-                                onChange={(e) => setPassword(e.target.value)} 
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
                         </Col>
-                        
+
                     </FormGroup>
                     <FormGroup row>
                         <Label
@@ -235,9 +276,9 @@ const RegistrationForm = () => {
                                 placeholder="confirm password"
                                 type="password"
                                 required="true"
-                                onChange={(e)=>setCnfPassword(e.target.value)}
-                                valid = {password === cpassword}
-                                invalid= {password !== cpassword}
+                                onChange={(e) => setCnfPassword(e.target.value)}
+                                valid={((password === cpassword) && (password !== ""))}
+                                invalid={((password !== cpassword) && (password !== ""))}
                             />
                             <FormFeedback valid>
                                 passwords are matched
@@ -279,10 +320,10 @@ const RegistrationForm = () => {
                                 onChange={(e) => (setDomain(e.target.value))}
                                 required
                             >
-                                <option>
+                                <option >
                                     None
                                 </option>
-                                <option>
+                                <option >
                                     Web
                                 </option>
                                 <option>
@@ -305,7 +346,7 @@ const RegistrationForm = () => {
                             for="exampleSelect"
                             sm={2}
                         >
-                            Number of Members
+                            Member Count
                         </Label>
                         <Col sm={10}>
                             <Input
@@ -314,9 +355,8 @@ const RegistrationForm = () => {
                                 type="select"
                                 onChange={(e) => { setTable(e.target.value) }}
                                 required
-                            >
-                                <option>
-                                    none
+                            >   <option>
+
                                 </option>
                                 <option>
                                     3
@@ -326,22 +366,28 @@ const RegistrationForm = () => {
                                 </option>
                             </Input>
                         </Col>
+
+                        <FormGroup row>
+                            <Label>Member Details</Label>
+                        
+                            <div className='text-center ' style={{marginLeft:"2%"}} >
+
+                            {fourthRow(memberCount)}
+                            </div>
+                    
+                            
+                        </FormGroup>
+                        <FormGroup row>
+                            <Col className='text-center'>
+                                <Button className='col-4' style={{ "backgroundColor": "#281E5D" }} onClick={handleSubmit} >
+                                    Submit
+                                </Button>
+                            </Col>
+                        </FormGroup>
+
                     </FormGroup>
 
-                    <FormGroup row>
-                        <Label>Member Details</Label>
-                        {fourthRow(memberCount)}
-                    </FormGroup>
-                    <FormGroup row>
-                        <Col className='text-start'>
-                            <Link to='/' className="btn btn-warning">Back</Link>
-                        </Col> 
-                        <Col className='text-end'>
-                            <Button type="submit" color='success' onClick={{handleSubmit}} >
-                                Submit
-                            </Button>
-                        </Col>
-                    </FormGroup>
+
                 </Form>
             </div>
         </>

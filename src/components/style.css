@@ -1,21 +1,27 @@
 /* Works on Firefox */
- .event-panel 
- {
-    scrollbar-width: thin;
-    scrollbar-color: blue orange;
-  }
-  
-  /* Works on Chrome, Edge, and Safari */
-  .event-panel::-webkit-scrollbar {
-    width: 12px;
-  }
-  
-  .event-panel::-webkit-scrollbar-track {
-    background: orange;
-  }
-  
-  .event-panel::-webkit-scrollbar-thumb {
-    background-color: blue;
-    border-radius: 20px;
-    border: 3px solid orange;
-  }
+.event-panel 
+{
+   scrollbar-width: thin;
+   scrollbar-color: #281E5D;
+ }
+ 
+ /* Works on Chrome, Edge, and Safari */
+ .event-panel::-webkit-scrollbar {
+   width: 12px;
+ }
+ 
+ .event-panel::-webkit-scrollbar-track {
+   background: white;
+ }
+ 
+ .event-panel:hover::-webkit-scrollbar-thumb {
+   background-color: #281E5D;
+   border-radius: 20px;
+   
+ }
+ .myborder {
+   border : 2px solid #0B3B6C;
+ }
+ .mybackgroundcolor{
+   background-color: #0B3B6C;
+ }
